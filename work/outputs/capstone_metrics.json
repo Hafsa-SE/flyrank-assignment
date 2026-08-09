@@ -1,0 +1,45 @@
+{
+  "n_rows": 30000,
+  "n_clients": 32,
+  "held_out_clients": 6,
+  "held_out_rows": 2325,
+  "held_out_base_rate": 0.391,
+  "comparison_table": {
+    "random_forest": {
+      "precision_at_20": 0.9,
+      "precision_at_50": 0.78,
+      "roc_auc": 0.7473,
+      "base_rate": 0.391
+    },
+    "baseline_rule": {
+      "precision_at_20": 0.85,
+      "precision_at_50": 0.66,
+      "roc_auc": 0.5555,
+      "base_rate": 0.391
+    },
+    "decision_tree": {
+      "precision_at_20": 0.65,
+      "precision_at_50": 0.54,
+      "roc_auc": 0.6979,
+      "base_rate": 0.391
+    },
+    "logistic_regression": {
+      "precision_at_20": 0.35,
+      "precision_at_50": 0.4,
+      "roc_auc": 0.7003,
+      "base_rate": 0.391
+    }
+  },
+  "split_design_check": {
+    "random_split_precision_at_50": 0.98,
+    "grouped_split_precision_at_50": 0.78,
+    "clients_leaking_in_random_split": 31
+  },
+  "archetype_counts": {
+    "monitor_only": 13274,
+    "refresh_priority": 6575,
+    "ctr_fix_candidate": 4723,
+    "protect_and_expand": 4006,
+    "low_priority_deep": 1422
+  }
+}
