@@ -145,13 +145,19 @@
     <span class="sec-num">Abstract</span>
     <div class="abstract-box">
       <p>
+        FlyRank publishes content into client websites and watches search performance so pages
+        don't get abandoned after launch &mdash; but content quietly decays anyway, and most teams
+        notice too late. FlyRank's product already flags this with hand-written rules (a health
+        score, quick-win tags), and this paper's case study is the gap those rules leave open.
         <strong>Question:</strong> given a portfolio of content pages, which ones should a human
-        review first for a possible SEO decline? <strong>Data:</strong> 30,000 pages across 32
+        review first for a possible SEO decline &mdash; and can a trained model beat the hand-written
+        rule it's meant to replace? <strong>Data:</strong> 30,000 pages across 32
         anonymized client portfolios, with 90-day search and engagement metrics and a
         30-day-vs-previous-30-day trend label. <strong>Method:</strong> a transparent rule-based
-        baseline was compared against Logistic Regression, a Decision Tree, and a Random Forest,
-        validated on a client-grouped held-out split (not a random row split) to prevent a model
-        from partly recognizing clients it had already seen. <strong>Result:</strong> the Random
+        baseline (standing in for FlyRank's existing flag logic) was compared against Logistic
+        Regression, a Decision Tree, and a Random Forest, validated on a client-grouped held-out
+        split (not a random row split) to prevent a model from partly recognizing clients it had
+        already seen. <strong>Result:</strong> the Random
         Forest reached 0.78 precision in its top 50 flagged pages, versus 0.66 for the rule-based
         baseline and a 0.39 base rate on the held-out set &mdash; and the same model, scored under a
         naive random split instead, appeared to reach 0.98, a result driven almost entirely by
@@ -163,9 +169,24 @@
 
   <section id="introduction">
     <span class="sec-num">1&nbsp;&mdash;&nbsp;Introduction</span>
-    <h2>The decision this supports</h2>
+    <h2>The FlyRank content problem this paper takes on</h2>
     <p>
-      A content team with limited review time faces the same question every week: out of
+      FlyRank builds content as infrastructure: research, write, publish straight into a
+      client's site, then watch the search data and optimize &mdash; a full cycle meant to run
+      mostly on algorithms rather than people doing it by hand. The trouble shows up in almost
+      every portfolio the same way: a page ranks well, then quietly decays &mdash; rankings slip,
+      clicks drop &mdash; and by the time someone notices, value has already been lost.
+    </p>
+    <p>
+      FlyRank's product already answers "which page first?" today, with hand-written rules: a
+      health score, quick-win tags, needs-attention flags &mdash; if-this-then-that logic with
+      hand-picked thresholds. These rules work and run in production, but by design they run out
+      exactly where signals get numerous, tangled, and shifting. Nothing trained on the data has
+      replaced them yet &mdash; that gap is this paper's case study, and its existing flags are
+      used here strictly as a baseline to beat, never as a model input (see Methodology).
+    </p>
+    <p>
+      A content team with limited review time faces this same question every week: out of
       thousands of pages, which ones are actually worth a human's attention right now? Reviewing
       randomly wastes time on healthy pages; reviewing by age alone misses pages that are
       declining despite being recently touched. This paper builds and honestly validates a risk
@@ -207,9 +228,12 @@
       8 one-hot-encoded categorical tiers &mdash; 52 columns total after encoding.
     </p>
     <p>
-      <strong>Baseline:</strong> a transparent, non-ML rule. It scores visible pages
+      <strong>Baseline:</strong> a transparent, non-ML rule &mdash; the same style of hand-written,
+      if-this-then-that logic FlyRank's own product flags use today (a health score, quick-win
+      tags). It scores visible pages
       (real position, &ge;500 impressions/90d) by how far their CTR sits below their own
-      position-tier's median CTR, weighted by demand. No fitted weights, one reason code.
+      position-tier's median CTR, weighted by demand. No fitted weights, one reason code &mdash;
+      this is the rule the model has to beat, and it is never fed to the model as a feature.
     </p>
     <p>
       <strong>Validation design:</strong> a client-grouped split &mdash; 20% of the 32 clients
