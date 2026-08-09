@@ -1,0 +1,30 @@
+{
+  "validated_precision_at_50_client_grouped": 0.78,
+  "validated_precision_at_20_client_grouped": 0.9,
+  "held_out_clients": 6,
+  "held_out_rows": 2325,
+  "held_out_base_rate": 0.542,
+  "total_rows_scored": 30000,
+  "archetype_counts": {
+    "monitor_only": 13274,
+    "refresh_priority": 6575,
+    "ctr_fix_candidate": 4723,
+    "protect_and_expand": 4006,
+    "low_priority_deep": 1422
+  },
+  "action_counts": {
+    "monitor_no_action": 13274,
+    "refresh_content": 6575,
+    "fix_snippet_and_meta": 4723,
+    "leave_or_expand_thin_sections": 4006,
+    "low_priority_review": 1422
+  },
+  "monitor_only_share": 0.4425,
+  "position_tier_mix": {
+    "page_1": 0.394,
+    "striking": 0.243,
+    "page_3_5": 0.241,
+    "top_3": 0.077,
+    "deep": 0.044
+  }
+}
